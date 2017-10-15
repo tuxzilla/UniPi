@@ -22,7 +22,7 @@ sudo timedatectl set-timezone "Asia/Bangkok"
 sudo ntpdate pool.ntp.org
 
 git clone https://github.com/friendlyarm/NanoHatOLED.git
-if [ -d NanoHatOLED]; then
+if [ -d NanoHatOLED ]; then
   cd NanoHatOLED
   sudo -H ./install.sh
   cd ..
