@@ -5,13 +5,30 @@ if [ $(id -u) -ne 0 ]; then
   exit 1
 fi
 
-cd Source/ 
-wget http://dl.ubnt.com/unifi/5.4.19/unifi_sysvinit_all.deb
+# Install NanoHat OLED
+echo " "
+echo "Check for internet connectivity..."
+echo "=================================="
+wget -q --tries=2 --timeout=100 http://www.google.co.th -O /dev/null
+if [ $? -eq 0 ];then
+	echo "Connected"
+else
+	echo "Unable to Connect, try again !!!"
+	exit 0
+fi
+
+#Set Time & Timezone
+sudo timedatectl set-timezone "Asia/Bangkok"
+sudo ntpdate pool.ntp.org
 
 git clone https://github.com/friendlyarm/NanoHatOLED.git
-cd NanoHatOLED
-sudo -H ./install.sh
-cd ..
+if [ -d NanoHatOLED]; then
+  cd NanoHatOLED
+  sudo -H ./install.sh
+  cd ..
+fi
+echo "NanoHatOLED installed"
+
 sudo python -m pip install --upgrade pip
 
 tar xvfz Pillow-4.3.0.tar.gz
@@ -22,3 +39,23 @@ tar xvfz Django-1.11.6.tar.gz
 cd Django-1.11.6
 sudo python setup.py install
 cd ..
+
+# Install UniFi Controller
+echo " "
+echo "Install UniFi Controller..."
+echo "=================================="
+cd Source/
+echo " "
+echo "Download UniFi Controller..."
+echo "=================================="
+wget http://dl.ubnt.com/unifi/5.4.19/unifi_sysvinit_all.deb
+
+echo " "
+echo "Download Dependency file..."
+echo "=================================="
+sudo apt-get -y install mongodb-server openjdk-8-jre-headless jsvc libcommons-daemon-java java-virtual-machine
+
+echo " "
+echo "Install UniFi..."
+echo "=================================="
+sudo dpkg -i unifi_sysvinit_all.deb
