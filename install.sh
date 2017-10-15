@@ -44,7 +44,7 @@ cd ..
 echo " "
 echo "Install UniFi Controller..."
 echo "=================================="
-cd Source/
+cd Source
 echo " "
 echo "Download UniFi Controller V.5.4.19 ..."
 echo "=================================="
