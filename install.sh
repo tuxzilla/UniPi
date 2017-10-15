@@ -5,7 +5,6 @@ if [ $(id -u) -ne 0 ]; then
   exit 1
 fi
 
-# Install NanoHat OLED
 echo " "
 echo "Check for internet connectivity..."
 echo "=================================="
@@ -18,27 +17,11 @@ else
 fi
 
 #Set Time & Timezone
+echo " "
+echo "Update Timezone "Asia/Bangkok" and Current time..."
+echo "=================================="
 sudo timedatectl set-timezone "Asia/Bangkok"
 sudo ntpdate pool.ntp.org
-
-git clone https://github.com/friendlyarm/NanoHatOLED.git
-if [ -d NanoHatOLED ]; then
-  cd NanoHatOLED
-  sudo -H ./install.sh
-  cd ..
-fi
-echo "NanoHatOLED installed"
-
-sudo python -m pip install --upgrade pip
-
-tar xvfz Pillow-4.3.0.tar.gz
-cd Pillow-4.3.0
-sudo python setup.py install
-cd ..
-tar xvfz Django-1.11.6.tar.gz
-cd Django-1.11.6
-sudo python setup.py install
-cd ..
 
 # Install UniFi Controller
 echo " "
@@ -59,3 +42,12 @@ echo " "
 echo "Install UniFi..."
 echo "=================================="
 sudo dpkg -i unifi_sysvinit_all.deb
+
+# Install NanoHat OLED
+git clone https://github.com/friendlyarm/NanoHatOLED.git
+if [ -d NanoHatOLED ]; then
+  cd NanoHatOLED
+  sudo -H ./install.sh
+  cd ..
+fi
+echo "NanoHatOLED installed"
