@@ -31,7 +31,8 @@ cd Source
 echo " "
 echo "Download UniFi Controller V.5.4.19 ..."
 echo "=================================="
-wget http://dl.ubnt.com/unifi/5.4.19/unifi_sysvinit_all.deb
+#wget http://dl.ubnt.com/unifi/5.4.19/unifi_sysvinit_all.deb
+wget http://dl.ubnt.com/unifi/5.5.24/unifi_sysvinit_all.deb
 
 echo " "
 echo "Download Dependency file..."
