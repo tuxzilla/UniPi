@@ -29,9 +29,8 @@ echo "Install UniFi Controller..."
 echo "=================================="
 cd Source
 echo " "
-echo "Download UniFi Controller V.5.4.19 ..."
+echo "Download UniFi Controller V.5.5.24 ..."
 echo "=================================="
-#wget http://dl.ubnt.com/unifi/5.4.19/unifi_sysvinit_all.deb
 wget http://dl.ubnt.com/unifi/5.5.24/unifi_sysvinit_all.deb
 
 echo " "
@@ -43,6 +42,16 @@ echo " "
 echo "Install UniFi..."
 echo "=================================="
 sudo dpkg -i unifi_sysvinit_all.deb
+echo "Configuration UniFi..."
+echo "=================================="
+echo "unifi.db.extraargs=--smallfiles" >> /usr/lib/unifi/data/system.properties
+echo "unifi.https.port=443" >> /usr/lib/unifi/data/system.properties
+cd ..
+echo "Clean UniPi Source..."
+echo "=================================="
+if [ -d UniPi ]; then
+  rm -rf UniPi
+fi
 
 # Install NanoHat OLED
 git clone https://github.com/friendlyarm/NanoHatOLED.git
