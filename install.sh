@@ -42,10 +42,18 @@ echo " "
 echo "Install UniFi..."
 echo "=================================="
 sudo dpkg -i unifi_sysvinit_all.deb
+
+echo "Delay 10 secs..."
+echo "=================================="
+sleep 10;
+
 echo "Configuration UniFi..."
 echo "=================================="
+echo "Stop Unifi service..."
+/etc/init.d/unifi stop
 echo "unifi.db.extraargs=--smallfiles" >> /usr/lib/unifi/data/system.properties
 echo "unifi.https.port=443" >> /usr/lib/unifi/data/system.properties
+echo "Start Unifi service..."
 cd ..
 echo "Clean UniPi Source..."
 echo "=================================="
